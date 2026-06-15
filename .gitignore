@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Vercel
+.vscode/
+.vercel
+.vercel-tmp/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Qoder
+.qoder/
+
+# Env
+.env
+.env.local

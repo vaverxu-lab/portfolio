@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>作品集 | XU WENHUA</title>
+    <meta name="description" content="设计师 × 创意工作者 · 探索视觉与交互的边界" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><text x='16' y='22' text-anchor='middle' fill='white' font-size='18' font-family='Inter, sans-serif' font-weight='bold'>X</text></svg>" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- 粒子画布 -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- 鼠标光晕 -->
+    <div class="mouse-glow"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar" role="navigation">
+        <a href="#" class="navbar-logo">许文华作品集</a>
+        <ul class="navbar-links">
+            <li><a href="#works">作品</a></li>
+            <li><a href="#stats">数据</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            可交互作品集
+        </div>
+        <h1>
+            许文华 · 作品集<br />
+            <span class="gradient-text">数据可视化 & 品牌设计</span>
+        </h1>
+        <p class="hero-subtitle">
+            专注大屏数据可视化、品牌视觉与UI设计<br class="hide-mobile" />
+            以视觉语言传递数据价值，用设计驱动体验创新
+        </p>
+        <div class="hero-cta">
+            <a href="#works" class="btn btn-primary">
+                浏览作品
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"/>
+                    <path d="M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            <a href="#contact" class="btn btn-outline">联系我</a>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>向下滚动</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- 作品集区域 -->
+    <section id="works" class="portfolio-section">
+        <div class="section-header scroll-animate">
+            <span class="section-label">Selected Works</span>
+            <h2 class="section-title">精选作品</h2>
+            <p class="section-desc">点击卡片查看项目详情</p>
+        </div>
+
+        <div class="filter-bar"></div>
+
+        <div id="portfolio-grid" class="portfolio-grid"></div>
+    </section>
+
+    <!-- 统计数据区域 -->
+    <section id="stats" class="stats-section">
+        <div class="section-header scroll-animate">
+            <span class="section-label">By the Numbers</span>
+            <h2 class="section-title">一些数据</h2>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card scroll-animate">
+                <div class="stat-number" data-target="36">0+</div>
+                <div class="stat-label">完成项目</div>
+            </div>
+            <div class="stat-card scroll-animate">
+                <div class="stat-number" data-target="7">0+</div>
+                <div class="stat-label">设计门类</div>
+            </div>
+            <div class="stat-card scroll-animate">
+                <div class="stat-number" data-target="6">0+</div>
+                <div class="stat-label">年设计经验</div>
+            </div>
+            <div class="stat-card scroll-animate">
+                <div class="stat-number" data-target="100">0+</div>
+                <div class="stat-label">用心程度%</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact" class="footer">
+        <p class="footer-text">
+            基于创意与热情 · 期待与你的合作
+        </p>
+        <div class="footer-social">
+            <a href="mailto:hello@example.com">Email</a>
+            <a href="https://www.behance.net" target="_blank" rel="noopener">Behance</a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+            <a href="许文华简历 2.pdf" target="_blank" class="resume-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                简历下载
+            </a>
+        </div>
+        <p class="footer-text" style="margin-top: 24px; font-size: 0.75rem;">
+            &copy; 2025 Xu Wenhua. All rights reserved.
+        </p>
+    </footer>
+
+    <script src="js/particles.js"></script>
+    <script src="js/portfolio.js"></script>
+</body>
+</html>
