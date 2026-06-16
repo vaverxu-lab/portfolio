@@ -440,6 +440,35 @@ class PortfolioFilter {
         this.render(this.data);
         this.setupFilterButtons();
         this.setupScrollAnimation();
+        this.setupVideoLazyLoad();
+    }
+
+    // 视频懒加载：卡片进入视口后才加载视频
+    setupVideoLazyLoad() {
+        if (!('IntersectionObserver' in window)) return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const video = entry.target.querySelector('.card-video');
+                    if (video && !video.dataset.loaded) {
+                        video.dataset.loaded = 'true';
+                        video.preload = 'metadata';
+                        // 如果 video 的 src 在 data-src 中，则设置
+                        if (video.dataset.src) {
+                            video.src = video.dataset.src;
+                            video.removeAttribute('data-src');
+                        }
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '200px' }); // 提前200px开始加载
+
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+            if (card.querySelector('.card-video')) {
+                observer.observe(card);
+            }
+        });
     }
 
     render(items) {
@@ -460,7 +489,7 @@ class PortfolioFilter {
             let coverHtml = '';
             if (item.video) {
                 coverHtml = `
-                    <video class="card-video" src="${item.video}" muted loop preload="metadata"></video>
+                    <video class="card-video" data-src="${item.video}" muted loop preload="none" playsinline></video>
                     <div class="card-play-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>
@@ -468,7 +497,7 @@ class PortfolioFilter {
                     </div>
                 `;
             } else {
-                coverHtml = `<img class="card-img" src="${item.cover}" alt="${item.title}" loading="lazy" />`;
+                coverHtml = `<img class="card-img" src="${item.cover}" alt="${item.title}" loading="lazy" decoding="async" onerror="this.style.display='none'" />`;
             }
 
             card.innerHTML = `
@@ -586,25 +615,25 @@ class PortfolioFilter {
         if (item.video) {
             mediaHtml = `
                 <div class="modal-video-wrapper">
-                    <video class="modal-video" src="${item.video}" controls autoplay muted playsinline></video>
+                    <video class="modal-video" src="${item.video}" controls autoplay muted playsinline preload="auto"></video>
                 </div>
             `;
         } else if (item.images && item.images.length === 1) {
             mediaHtml = `
                 <div class="modal-image-wrapper">
-                    <img class="modal-img" src="${item.images[0]}" alt="${item.title}" />
+                    <img class="modal-img" src="${item.images[0]}" alt="${item.title}" loading="lazy" decoding="async" />
                 </div>
             `;
         } else if (item.images && item.images.length > 1) {
             mediaHtml = `
                 <div class="modal-gallery">
                     <div class="modal-gallery-main">
-                        <img class="modal-gallery-img" src="${item.images[0]}" alt="${item.title}" />
+                        <img class="modal-gallery-img" src="${item.images[0]}" alt="${item.title}" loading="lazy" decoding="async" />
                     </div>
                     <div class="modal-gallery-thumbs">
                         ${item.images.map((img, i) => `
                             <div class="gallery-thumb ${i === 0 ? 'active' : ''}" data-index="${i}">
-                                <img src="${img}" alt="${item.title} - ${i + 1}" loading="lazy" />
+                                <img src="${img}" alt="${item.title} - ${i + 1}" loading="lazy" decoding="async" />
                             </div>
                         `).join('')}
                     </div>
