@@ -488,8 +488,10 @@ class PortfolioFilter {
             // 封面内容
             let coverHtml = '';
             if (item.video) {
+                // 从视频路径生成海报路径: videos/xxx.mp4 → videos/posters/xxx.jpg
+                const posterPath = item.video.replace(/\.[^.]+$/, '').replace('videos/', 'videos/posters/') + '.jpg';
                 coverHtml = `
-                    <video class="card-video" data-src="${item.video}" muted loop preload="none" playsinline></video>
+                    <video class="card-video" data-src="${item.video}" poster="${posterPath}" muted loop preload="none" playsinline></video>
                     <div class="card-play-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>
